@@ -1,0 +1,377 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk : Installation de Debian</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            p{
+              font-size:1.5em;
+            }
+            li{
+              font-size:1.5em;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Installation de Debian et des services Minimum</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_1.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Le premier écran vous demande de sélectionner une langue. Idéalement, si vous parlez un minimum l'anglais, je vous conseille d'utiliser cette langue d'installation.</p>
+            <p>En effet, il vous sera ainsi plus facile de "googler" des messages d'erreur et de trouver plus facilement des réponses.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_2.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>La localisation n'est pas importante pour nous.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_3.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Ici sélectionnez le Francais pour avoir un clavier AZERTY.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_4.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>L'installeur charge alors tous les modules présent dans le CD de la NetInstall. Dans la grande majorité des cas, ces modules seront suffisant.</p>
+            <p>Dans le cas d'un "vrai" serveur physique, vous pouvez trouver des problèmes à partir d'ici. Par exemple dans la non prise en charge d'un contrôleur de disque dur ou d'une carte réseau.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_5.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Indiquer le nom local de votre machine.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_6.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Pour notre TP nous n'avons pas besoin de domaine. Vous pouvez laisser ce paramètre vide</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_7.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Le compte <strong>root</strong> est le compte administrateur de la machine qui a tous les droits.</p>
+            <p>Indiquer un mot de passe (idéalement 1234) car c'est une machine de TP.</p>
+            <p><strong>ATTENTION : </strong>Ne jamais mettre de mot de passe de ce type sur un serveur de production !</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_8.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Confirmez votre mot de passe.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_9.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Debian vous créé un compte utilisateur par défaut.</p>
+            <p>Indiquez ici le nom complet de l'utilisateur (ex : Jeremy Salmon)</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_10.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Indiquez le login de cette utilisateur (sans espace, ni caractères spéciaux)</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_11.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Indiquez le mot de passe 1234</p>
+            <p><strong>ATTENTION : </strong>Ne jamais mettre de mot de passe de ce type sur un serveur de production !</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_12.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Confirmez votre mot de passe.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_13.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Le serveur configure automatiquement à l'aide du protocole NTP s'il a accès à Internet.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_14.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Le processus de partitionnement du disque dur commence</p>
+            <p>C'est ici que le disque dur sera formatté et prêt à recevoir le système d'exploitation.</p>
+            <p>Sélectionnez "Use entire disk" pour formatter le disque de 8Go</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_15.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Sélectionnez le disque proposé.</p>
+            <p>Ce disque est notre fichier VDI.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_16.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Sélectionnez "All files on one partition". Ceci ne créera q'une seule partition de données.</p>
+            <p>Dans un serveur de production on sépare généralement les répertoires dans des partitions séparées.</p>
+            <p>Par exemple en mettant /var/ (toutes les données variables) dans une partition, (/bin/) les binaires ... dans une autres, etc.</p>
+            <p>Ceci permet en cas de remplissage des logs par exemple (/var/log/) ne pas remplir TOUT le disque et ainsi de faire planter la machine.</p>
+            <p><strong>IMPORTANT : </strong>Dans un serveur de production, séparez les répertoires dans des partitions dédiées.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_17.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_18.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Sélectionnez "YES" pour appliquer et donc formatter votre disque dur</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_19.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Une fois le disque formatté, Debian commence à installer ses fichiers de base sur le disque dur.</p>
+            <p>Avant cette étape, aucune écriture sur le disque dur n'avait eut lieu.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_20.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Le système de gestion de paquets APT à besoin d'un "annuaire" d'applications à récupérer sur Interner.</p>
+            <p>L'idéal est de sélectionner un serveur prêt de nous. Dans notre cas la France par exemple.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_21.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Dans chaque pays il y a plusieurs "copies" de cet annuaire. Sélectionnez un serveur.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_22.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Dans notre cas nous n'avons pas de proxy sur le réseau.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_23.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Debian télécharge l'annuaire, le décompresse et l'installe sur notre serveur.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_24.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>L'étude statistique permet d'envoyer sur les serveurs de Debian des informations sur tous les paquets que vous installez, mettez à jour, supprimez, etc.</p>
+            <p>Dans notre cas nous n'enverrons pas nos données</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_25.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_26.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Nous devons maintenant choisir les paquets que nous installerons pour démarrer.</p>
+            <p>Notre serveur n'aura pas d'interface graphique et nous n'utiliserons que la console.</p>
+            <p>Déselectionnez avec la barre espace les paquets inutile et ne conservez que "SSH Server" et "standard system utilities"</p>
+            <p>L'installeur téléchargera alors les logiciels et les installera.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_27.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Enfin nous devons installer le "Boot Loader" qui permettra à notre Linux de démarrer.</p>
+            <p>Sélectionnez "Yes"</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_28.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Sélectionnez /dev/sda</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/Debian/step_29.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Votre Debian va maintenant démarre et être prêt à utiliser.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-lg pull-right" href="outils.html" role="button">Continuer &raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>

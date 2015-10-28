@@ -1,0 +1,102 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk : Réseau Toip</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="col-md-8">
+          <img src="img/reseau_toip.svg" class="img-responsive"/>
+        </div>
+        <div class="col-md-4">
+          <h2>De nouveaux équipements ... sur le réseau informatique existant</h2>
+          <p>La mise en place d'un serveur de Téléphonie sur IP implique :</p>
+          <ul>
+            <li>
+              <strong>Serveur de ToIP : </strong>
+              le serveur de téléphonie est un serveur informatique au même titre que le serveur de mail, le controleur de domaine ou un serveur de fichier.<br>
+              Le serveur de téléphonie peut donc être une machine physique ou une machine virtuelle au sein de l'infrastructure de virtualisation existante dans l'entreprise.
+            </li>
+            <li>
+              <strong>Téléphones IP : </strong>
+              les téléphones IP sont des équipements qui se branchent sur le réseau informatique, et qui possèdent donc toutes les caractéristiques d'un périphériques IP.<br>
+              Ils existent de différentes marques de téléphones IP (snom, Avaya, Cisco, Grandstream, ...). Chaque téléphone à un mécanisme de configuration requérant au minimum un login, un mot de passe et l'adresse IP (ou le FQN) du serveur de téléphonie.<br>
+              Les téléphones IP embarque généralement un système d'auto-provisionning qui leurs permettent de se configurer automatiquement.
+            </li>
+            <li>
+              <strong>Softphone : </strong>
+              est un logiciel qui transforme un ordinateur en téléphone IP. A l'instar des téléphones, il est nécessaire de posséder un login, un mot de passe et l'adresse IP d'un serveur de téphonie pour pouvoir profiter du système de ToIP directement depuis son ordinateur.
+            </li>
+            <li>
+              <strong>Lignes opérateur : </strong>
+              les entreprises disposent toujours de lignes opérateur existantes.<br>
+              Ces lignes peuvent être de technologie analogique ou numérique.<br>
+              Ces lignes sont généralement a réutiliser dans le système de téléphonie sur IP, et doivent donc être connectées au serveur de téléphonie. 
+            </li> 
+            <li>
+              <strong>Passerelle : </strong>
+              est un équipement qui permet de convertir le signal des lignes analogiques / numériques en flux IP compréhensibles par le serveur de téléphonie sur IP.<br>
+              Il existe de nombreuses marques de passerelles (Cisco, Avaya, Patton, Grandstream ...).<br>
+              Dans un environnement ou le serveur de téléphonie sur IP est virtualisé, on utilise ces passerelles afin de ne pas a avoir installer physiquement de matériel dans le serveur.
+            </li>
+            <li>
+              <strong>Carte PCI : </strong>
+              le serveur de téléphonie sur IP Asterisk gère des cartes PCI de conversion des flux analogiques ou numériques des lignes opérateur en flux compatible.<br>
+              Il existe différentes marques de cartes PCI (Digium, Sangoma, Zycco).<br>
+              Ces cartes doivent être physiquement installées dans le serveur de téléphonie (ce qui peut les rendre difficile d'utilisation dans un environnement virtualisé).
+              <br>Les cartes PCI sont moins couteuses que les passerelles IP car au lieu d'intégrer des DSP de traitement du signal elle délègue la conversion au CPU du serveur.<br>
+              L'inconvénient des cartes PCI est qu'il faut généralement prévoir des serveurs plus puissants.
+            </li>
+            <li>
+              <strong>Opérateurs IP : </strong>
+              les opérateur IP sont des opérateurs téléphoniques qui fournissent des liens téléphoniques au travers de connexion IP (généralement la connexion Internet de l'entreprise).<br>
+              Les opérateurs IP permettent plus de souplesses car il ne sont pas liés physiquement (comme le sont les lignes analogiques ou numériques) au serveur de téléphonie.<br>
+              Un opérateur IP fournir un login, un mot de passe et un FQN de serveur qui peut être utilisé dans le monde entier.
+            </li>
+          </ul>
+          <p><a class="btn btn-primary btn-lg pull-right" href="maquette.html" role="button">Continuer &raquo;</a></p>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>

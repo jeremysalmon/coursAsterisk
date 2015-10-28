@@ -1,0 +1,122 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk : Travailler avec Putty</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            p{
+              font-size:1.5em;
+            }
+            code{
+              margin-top:15px;
+              margin-bottom:15px;
+              font-size:1em;
+            }
+            li{
+              font-size:1em;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <h2>Configuration d'un compte SIP</h2>
+            <p>Votre serveur de téléphonie Asterisk est maintenant installé et lancé sur votre Debian.</p>
+            <p>Asterisk dispose d'une console, sur laquelle vous pouvez vous connecter, et lancer des commandes pour interragir avec les fonctions de téléphonie.</p>
+            <p>Pour vous connecter à la console de Asterisk, depuis la console Linux tapez : </p>
+            <code>asterisk -vvvvvvvr</code>
+            <ul>
+              <li>v : les "v" représentent le niveau de log qui sera affiché sur l'écran. Plus vous mettez de "v" plus vous aurez d'informations dans la console de Asterisk</li>
+              <li>r : pour se connecter à l'Asterisk local à la machine</li>
+            </ul>
+            <p>Si vous désirez plus d'aide sur la connexion à la console d'Asterisk vous pouvez tapez dans la console de Linux <code>asterisk -h</code></p>
+            <p>L'ensemble des fichiers de configuration du serveur Asterisk se situe dans /etc/asterisk/.</p>
+            <p>Lorsque vous avez installé le paquet <code>asterisk-config</code>, vous avez installé des fichiers de configuration d'exemple.</p>
+            <p>Le fichier de configuration des périphériques SIP est <code>sip.conf</code>. .</p>
+            <p>L'idéal est de partir d'un fichier de configuration vide, ce qui vous permettra de garder l'esprit clair. Pour celà, dans la console de Linux, tapez (en root): </p>
+            <code>
+              cd /etc/asterisk/ <br>
+              mv sip.conf sip.conf.orig <br>
+              > sip.conf
+            </code>
+            <p>Vous pouvez maintenant éditer <code>/etc/asterisk/sip.conf</code>avec WinSCP / Sublime Text directement depuis Windows</p>
+            <p>Le fichier <code>sip.conf</code> doit obligatoirement contenir une section <code>[general]</code> qui pourra contenir les paramètres communs à tous les périphériques SIP que nous configurerons.</p>
+            <p>Pour créer un périphérique SIP dans le fichier nous aurons besoin :</p>
+            <ul>
+              <li>[monTelephone1] : le nom de votre périphérique entre crochets. Remplacez monTelephone1 par ce que vous voulez.</li>
+              <li>type = friend : peut recevoir et emettre des appels</li>
+              <li>secret = password : mot de passe du périphérique. Remplacez password par le mot de passe que vous désirez</li>
+              <li>host = dynamic : peut se connecter depuis n'importe quelle adresse IP du réseau</li>
+              <li>disallow = all : désactive tous les codecs</li>
+              <li>allow = ulaw : autorise le codec ulaw (g711)</li>
+            </ul>
+
+            <p>Votre fichier <code>sip.conf</code> doit donc contenir : </p>
+            <code>
+            [general]<br>
+            <br>
+            [monTelephone1]<br>
+            type = friend<br>
+            secret = password<br>
+            host = dynamic<br>
+            disallow = all<br>
+            allow = ulaw<br>
+            </code>
+
+            <p>Pour vérifiez que le périphérique SIP est bien créé dans Asterisk, connectez vous à la console (<code>asterisk -vvvvvvr</code>) et tapez la commande <code>sip show peers</code></p>
+            <p>Asterisk vous indique à ce niveau qu'aucun périphérique SIP n'existe.</p>
+            <p>En effet, Asterisk ne lit pas en temps réel les modifications que vous effectuez dans les fichiers de configuration. Il faut que vous indiquiez à Asterisk de relire ses fichiers de configurations quand vous le désirez.</p>
+            <p>Pour demander à Asterisk de relire ses fichiers de configuration tapez dans sa console : <code>core reload</code></p>
+            <p>Vous pouvez maintenant relancez la commande <code>sip show peers</code> et voir que votre périphérique est bien créé dans Asterisk.</p>
+            <p>Si vous ne voyez pas votre périphérique c'est que vous avez fait une erreur de syntaxe dans le fichier sip.conf.</p>
+            <h2>Félicitations, vous venez de créer votre premier périphérique SIP.</h2>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-lg pull-right" href="softphone.html" role="button">Continuer &raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk : Installation de VirtualBox</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            p{
+              font-size:1.5em;
+            }
+            li{
+              font-size:1.5em;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Installation de VirtualBox et préparation pour Debian</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_1.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Créez une nouvelle machine en cliquant le bouton "New"</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_2.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Donnez un nom à votre machine virtuelle (ex : Asterisk).</p>
+            <p>Sélectionnez le type "Linux"/"Linux 2.6 / 3.X / 4.x (32-bit)</p>
+            <p>Ce paramètre permet à VirtualBox d'optimiser automatiquement ses paramètres (CPU, Mémoire, Comportement de virtualisation ...)</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_3.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Notre Linux ne disposera pas d'interface graphique.</p>
+            <p>256 Mo de RAM seront donc suffisant.</p>
+            <p>Ce paramètre peut être changé même après l'installation du système d'exploitation. Il suffira alors de redémarrer la machine pour que la nouvelle RAM soit prise en compte.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_4.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Créez un nouveau disque.</p>
+            <p>Vous pouvez aussi a cette étape récupérer un VDI d'une autre machine par exemple.</p>
+            <p><strong>ATTENTION : </strong>Pour pouvoir copier un VDI il faut éteindre la machine virtuelle, sinon le fichier est inexploitable.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_5.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Utilisez le format de fichier VDI qui est le format par défaut de VirtualBox.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_6.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Utilisez "Dynamically Allocated". Dans ce mode, votre fichier VDI n'occupera que la taille effective des fichiers de la machine virtuelle.</p>
+            <p>Ainsi même si vous avez demandé un disque de 8Go, le fichier VDI ne fera cette taille qu'une fois le disque dur de la machine virtuelle entièrement rempli.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_7.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Pour notre TP, l'idéal est d'avoir un disque d'une taille de 8go.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_8.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Laissez le nom par défaut proposé pour le fichier VDI. Par défaut, il prend le même nom que votre machine virtuelle.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_9.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>IMPORTANT : </strong>Configurez le mode réseau en "Bridge" en utilisant la carte réseau avec laquelle vous êtes connectée au réseau local.</p>
+            <p>En mode bridge, votre machine virtuelle disposera de sa propre adresse IP sur le réseau, et sera donc considéré comme une machine sur celui ci.</p>
+            <p>Ce mode de fonctionnement est obligatoire dans notre TP, car nous aurons a faire communiquer les serveurs de téléphonie des différents groupes.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_10.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>Enfin, nous aurons à installer notre système Debian. Comme sur une machine physique nous allons donc "insérer" le CD de Debian dans le lecteur "virtuel" de VirtualBox</p>
+            <p>Sélectionnez l'image Debian que vous avez téléchargé.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="text-align:center">
+              <img src="img/virtualBox/step_11.JPG" class="img-responsive">
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>En cliquant sur "Start" votre machine virtuelle démarre et vous tomberez normalement sur le premier écran d'installation de Debian.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-lg pull-right" href="install_debian.html" role="button">Continuer &raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>
