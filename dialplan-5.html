@@ -47,39 +47,27 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Cours Asterisk</a>
+            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
           </div>
         </div>
       </nav>
 
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="img/softphone1.jpg" class="img-responsive">
-            <img src="img/softphone2.jpg" class="img-responsive">
-            <img src="img/softphone3.jpg" class="img-responsive">
-          </div>
-          <div class="col-md-6">
-            <h2>Configuration d'un softphone</h2>
-            <p>Vous avez déclaré un périphérique "SIP" dans Asterisk. Vous avez donc créé un compte SIP qui peut être utilisé par un téléphone SIP ou par un softphone.</p>
-            <p>Nous allons donc maintenant télécharger et configurer un softphone avec le compte SIP que nous venons de déclarer dans Asterisk.</p>
-            <p>Il existe de nombreux softphone SIP sur le marché (voir : <a href="https://fr.wikipedia.org/wiki/Liste_des_logiciels_SIP#Clients_SIP" target="_blank">Liste des logiciels SIP sur Wikipedia</a>). Nous allons utiliser Zoiper dans notre cas.</p>
-            <p>Commencez par télécharger Zoiper depuis le site Internet : <a href="http://www.zoiper.com/en/voip-softphone/download/zoiper3" target="_blank">http://www.zoiper.com/en/voip-softphone/download/zoiper3</a></p>
-            <p>Installez Zoiper. Au premier démarrage, veillez bien à autoriser Zoiper dans le Firewall (Windows vous le demandera).</p>
-            <p>La configuration d'un softphone ou d'un téléphone SIP requiert toujours au minimum les informations suivantes :</p>
+        <div class="col-md-6 col-md-offset-3">
+      		<h2>Gestion des horaires d'ouverture / fermeture</h2>
+          <p >Vous savez maintenant construire des plans d'appels qui utilisent plusieurs applications Asterisk. L'objectif de cette étape est de réussir à mettre en place une gestion des horaires d'ouverture / fermeture de votre entreprise.</p>
+          <p >Asterisk met à notre disposition l'application <code>gotoIfTime()</code>. Cette application nous permet de rediriger le traitement de nos appels suivant un créneau horaire.</p>
+          <p>Vous trouverez l'aide en ligne de cette application sur <a href="http://www.voip-info.org/wiki/view/Asterisk+cmd+GotoIfTime" target="_blank">voip-info.org</a> ou comme d'habitude dans la console de Asterisk en tapant <code>core show application gotoiftime</code></p>
+          <p>L'objectif de cette étape est de créer un numéro 2000 dans votre diaplan : 
             <ul>
-              <li>Nom d'utilisateur : le nom entre [] que vous avez déclaré dans sip.conf</li>
-              <li>Mot de passe : le mot de passe "secret" de sip.conf</li>
-              <li>Adresse IP (ou FQN) du serveur SIP : l'adresse de votre machine Linux (<code>ifconfig eth0</code> dans la console de Linux si vous ne connaissez pas l'adresse du serveur).</li>
+              <li>Si nous sommes du lundi au vendredi de 08:00 à 17:00 on affiche dans la console (avec <code>Noop</code>) le message "Nous sommes ouvert"</li>
+              <li>Si nous sommes en dehors de ces plages on affiche "Nous sommes fermés"</li>
             </ul>
-            <p>Une fois que vous avez configuré votre compte dans le softphone la commande <code>sip show peers</code> dans la console d'Asterisk devrait vous indiquer <code>1 online</code></p>
-            <h2>Félitations, vous avez un premier téléphone connecté à votre serveur de téléphonie.</h2>
-          </div>
-        </div>
-        
+          </p>
+      	</div>
         <div class="row">
           <div class="col-md-12">
-            <a class="btn btn-primary btn-lg pull-right" href="dialplan-2.html" role="button">Continuer &raquo;</a>
+            <a class="btn btn-primary btn-lg pull-right" href="dialplan-6.html" role="button">Continuer &raquo;</a>
           </div>
         </div>
       </div>

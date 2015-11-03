@@ -1,0 +1,110 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk : Travailler avec Putty</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            p{
+              font-size:1.5em;
+            }
+            code{
+              margin-top:15px;
+              margin-bottom:15px;
+              font-size:1em;
+            }
+            li{
+              font-size:1em;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="col-md-6 col-md-offset-3">
+      		<h2>2. Les plans d'appels</h2>
+      		<p style="font-size:1.2em">Comme nous l'avons vu dans le "Passer un premier appel", des extensions SIP sans plan d'appel (dialplan) sont complètement inutiles.</p>
+      		<p style="font-size:1.2em">Dans la déclaration d'un téléphone dans sip.conf la directive <code>context = moncontexte</code> indique à notre téléphone SIP quel diaplan il a la droit d'utiliser.</p>
+      		<p style="font-size:1.2em">Les plans d'appels (diaplan) sont créés dans le fichier <code>/etc/asterisk/extensions.conf</code>. Vous pourrez trouvez une aide sur la syntaxe des diaplans dans <a href="http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/asterisk-DP-Basics-SECT-1.html" target="_blank">la documentation de Asterisk</a></p>
+      		<p style="font-size:1.2em">La structure d'un context est sous la forme : 
+      			<code><br>
+      			[nomDuContext]<br>
+      			exten => nom, priorite, application(parametres)<br>
+      			exten => nom, priorite+1, application(parametres)
+      			</code><br>
+      			<ul>
+      				<li>nom : generalement le numéro que nous composerons sur notre téléphone. Dans le TP1 nous avions créé le numéro 900</li>
+      				<li>priorite : l'ordre d'execution de notre ligne dans le <code>nom</code>.</li>
+      				<li>application : l'application et ses paramètres que nous executerons à cette ligne</li>
+      			</ul>
+      		</p>
+      		<p style="font-size:1.2em">Comme nous l'avons vu lors du précédemment, un <code>nom</code> peut être composé de multiple lignes (<code>priorite</code>). Ceci nous permet d'imaginer que nous utilions des briques de légo quand nous réalisons nos dialplans.</p>
+      		<p style="font-size:1.2em">Un ensemble complet d'applications est disponible avec l'installation standard de asterisk. Pour avoir la liste des applications, il vous suffit de taper dans la console d'Asterisk <code>core show applications</code></p>
+      		<p style="font-size:1.2em">Si vous désirez l'aide sur une application particulière vous pouvez :
+      			<ul>
+      				<li>Dans la console d'Asterisk taper <code>core show application NOM_DE_L_APPLICATION</code></li>
+      				<li>Googler "nom de l'application cmd asterisk". Vous tomberez généralement dans les premiers résultats sur le site <a href="http://www.voip-info.org/" target="_blank">voip-info.org</a> qui est une source d'informations précieuse.</li>
+      			</ul>
+      		</p>
+      		<p style="font-size:1.2em">
+      			Dans la console d'Asterisk vous pouvez voir le contenu de tout le diaplan en tapant <code>dialplan show</code>
+      		</p>
+      		<p style="font-size:1.2em">
+      			Si vous voulez uniquement afficher le contenu d'un context particulier il vous suffit de taper <code>dialplan show nomDuContext</code>
+      		</p>
+      		<p style="font-size:1.2em">
+      			Créer un diaplan pour un numéro 900 qui utilise les 3 applications suivante :
+      			<ul>
+      				<li>Answer() : cette application permet de décrocher l'appel</li>
+      				<li>Noop(Ceci est un test de diaplan) : cette application permet d'afficher un message dans la console d'Asterisk</li>
+      				<li>Hangup() : cette application raccroche un appel</li>
+      			</ul>
+      			N'oubliez pas que vous devez taper <code>reload</code> dans la console d'Asterisk pour que celui-ci prenne en considération vos changements.
+      		</p>
+      		<p style="font-size:1.2em">Tester votre numéro 901 en le composant depuis votre softphone.</p>
+      		<p style="font-size:1.2em">Le résultat doit être l'affichafe de "Ceci est un test de dialplan" dans la console de Asterisk.</p>
+      	</div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-lg pull-right" href="dialplan-3.html" role="button">Continuer &raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>

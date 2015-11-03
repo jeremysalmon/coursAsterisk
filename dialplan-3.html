@@ -47,39 +47,36 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Cours Asterisk</a>
+            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
           </div>
         </div>
       </nav>
 
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="img/softphone1.jpg" class="img-responsive">
-            <img src="img/softphone2.jpg" class="img-responsive">
-            <img src="img/softphone3.jpg" class="img-responsive">
-          </div>
-          <div class="col-md-6">
-            <h2>Configuration d'un softphone</h2>
-            <p>Vous avez déclaré un périphérique "SIP" dans Asterisk. Vous avez donc créé un compte SIP qui peut être utilisé par un téléphone SIP ou par un softphone.</p>
-            <p>Nous allons donc maintenant télécharger et configurer un softphone avec le compte SIP que nous venons de déclarer dans Asterisk.</p>
-            <p>Il existe de nombreux softphone SIP sur le marché (voir : <a href="https://fr.wikipedia.org/wiki/Liste_des_logiciels_SIP#Clients_SIP" target="_blank">Liste des logiciels SIP sur Wikipedia</a>). Nous allons utiliser Zoiper dans notre cas.</p>
-            <p>Commencez par télécharger Zoiper depuis le site Internet : <a href="http://www.zoiper.com/en/voip-softphone/download/zoiper3" target="_blank">http://www.zoiper.com/en/voip-softphone/download/zoiper3</a></p>
-            <p>Installez Zoiper. Au premier démarrage, veillez bien à autoriser Zoiper dans le Firewall (Windows vous le demandera).</p>
-            <p>La configuration d'un softphone ou d'un téléphone SIP requiert toujours au minimum les informations suivantes :</p>
-            <ul>
-              <li>Nom d'utilisateur : le nom entre [] que vous avez déclaré dans sip.conf</li>
-              <li>Mot de passe : le mot de passe "secret" de sip.conf</li>
-              <li>Adresse IP (ou FQN) du serveur SIP : l'adresse de votre machine Linux (<code>ifconfig eth0</code> dans la console de Linux si vous ne connaissez pas l'adresse du serveur).</li>
-            </ul>
-            <p>Une fois que vous avez configuré votre compte dans le softphone la commande <code>sip show peers</code> dans la console d'Asterisk devrait vous indiquer <code>1 online</code></p>
-            <h2>Félitations, vous avez un premier téléphone connecté à votre serveur de téléphonie.</h2>
-          </div>
-        </div>
-        
+        <div class="col-md-6 col-md-offset-3">
+      		<h2>Faire communiquer 2 téléphones</h2>
+          <p style="font-size:1.2em">Votre objectif est maintenant de créer un deuxième téléphone SIP et de l'enregistrer dans un deuxième softphone sur votre ordinateur. Vous pouvez télécharger <a href="http://www.counterpath.com/x-lite-for-windows-download" target="_blank">Xlite</a> ou <a href="http://icanblink.com/download.phtml" target="_blank">Blink</a></p>
+          <p style="font-size:1.2em">Une fois votre softphone créé et enregistré, vérifiez que tout est correct en tapant <code>sip show peers</code></p>
+          <p>Vous devriez voir la liste de vos téléphones et l'adresse IP dans la colonne host.</p>
+          <p>Si celà n'est pas le cas, vérifier votre fichier <code>sip.conf</code> et la configuration de vos softphones</p>
+
+          <p style="font-size:1.2em">Nous allons maintenant créer un diaplan qui nous permettra d'appeler entre nos deux softphones. Pour celà nous utiliserons l'application <code>dial</code></p>
+
+          <p style="font-size:1.2em">Dans le context de vos deux téléphones créer les 2 applications suivantes :
+            <br>
+            <code>
+              exten => 100,1,Dial(SIP/100)<br>
+              exten => 101,1,Dial(SIP/101)
+            </code><br>
+            ou <code>100</code> et <code>101</code> sont vos deux numéros d'extensions.
+          </p>
+          
+          <p>N'oubliez pas de faire un <code>reload</code>. Essayez de passer un appel.</p>
+          <p>Si tout est correctement configuré,vos softphones devraient sonner.</p>
+      	</div>
         <div class="row">
           <div class="col-md-12">
-            <a class="btn btn-primary btn-lg pull-right" href="dialplan-2.html" role="button">Continuer &raquo;</a>
+            <a class="btn btn-primary btn-lg pull-right" href="dialplan-4.html" role="button">Continuer &raquo;</a>
           </div>
         </div>
       </div>

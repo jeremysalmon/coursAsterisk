@@ -47,39 +47,42 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Cours Asterisk</a>
+            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
           </div>
         </div>
       </nav>
 
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="img/softphone1.jpg" class="img-responsive">
-            <img src="img/softphone2.jpg" class="img-responsive">
-            <img src="img/softphone3.jpg" class="img-responsive">
-          </div>
-          <div class="col-md-6">
-            <h2>Configuration d'un softphone</h2>
-            <p>Vous avez déclaré un périphérique "SIP" dans Asterisk. Vous avez donc créé un compte SIP qui peut être utilisé par un téléphone SIP ou par un softphone.</p>
-            <p>Nous allons donc maintenant télécharger et configurer un softphone avec le compte SIP que nous venons de déclarer dans Asterisk.</p>
-            <p>Il existe de nombreux softphone SIP sur le marché (voir : <a href="https://fr.wikipedia.org/wiki/Liste_des_logiciels_SIP#Clients_SIP" target="_blank">Liste des logiciels SIP sur Wikipedia</a>). Nous allons utiliser Zoiper dans notre cas.</p>
-            <p>Commencez par télécharger Zoiper depuis le site Internet : <a href="http://www.zoiper.com/en/voip-softphone/download/zoiper3" target="_blank">http://www.zoiper.com/en/voip-softphone/download/zoiper3</a></p>
-            <p>Installez Zoiper. Au premier démarrage, veillez bien à autoriser Zoiper dans le Firewall (Windows vous le demandera).</p>
-            <p>La configuration d'un softphone ou d'un téléphone SIP requiert toujours au minimum les informations suivantes :</p>
+        <div class="col-md-6 col-md-offset-3">
+      		<h2>4. Menu vocal interactif</h2>
+          <p style="font-size:1.2em">Vous savez maintenant créer un diaplan, des extensions SIP, utiliser l'application <code>Noop</code>, <code>Dial</code> et <code>Playback</code></p>
+
+          <p style="font-size:1.2em">Vous allez maintenant créer un menu vocal. Un menu vocal ou IVR est un accueil automatique ou le système vous lit un fichier vocal puis vous propose de faire un choix (1,2,3 ...).</p>
+
+          <p style="font-size:1.2em">Les menus vocaux sont utilisés par les entreprises qui désirent décharger la standardiste en permettant à l'appelant de directement choisir le service avec le quel il désire être mis en relation.</p>
+
+          <p style="font-size:1.2em">L'entrée dans un menu vocal déclenche la lecture d'un message vocal. L'application <code>record</code> vous permet d'enregistrer un message.</p>
+
+          <p style="font-size:1.2em">Créer un numéro 2000 qui permet d'enregistrer un message qui sera lu à l'entrée de votre menu vocal.</p>
+
+          <p class="alert alert-danger">
+            Vous avez besoin d'un micro pour enregistrer le message depuis votre softphone.
+          </p>
+
+          <p style="font-size:1.2em">Avec Asterisk, l'application qui nous permettra d'attendre qu'un utilisateur appuie sur une touche est <code>background</code></p>
+
+          <p style="font-size:1.2em">A l'aide de vos connaissances et d'Internet essayez de créer un menu vocal (numéro 902) qui 
             <ul>
-              <li>Nom d'utilisateur : le nom entre [] que vous avez déclaré dans sip.conf</li>
-              <li>Mot de passe : le mot de passe "secret" de sip.conf</li>
-              <li>Adresse IP (ou FQN) du serveur SIP : l'adresse de votre machine Linux (<code>ifconfig eth0</code> dans la console de Linux si vous ne connaissez pas l'adresse du serveur).</li>
+              <li>sur touche 1 : nous lit le fichier vocal demo-congrats</li>
+              <li>sur touche 2 : nous affiche un message "touche 2" dans la console de Asterisk</li>
+              <li>sur touche 3 : fait sonner le téléphone 101</li>
             </ul>
-            <p>Une fois que vous avez configuré votre compte dans le softphone la commande <code>sip show peers</code> dans la console d'Asterisk devrait vous indiquer <code>1 online</code></p>
-            <h2>Félitations, vous avez un premier téléphone connecté à votre serveur de téléphonie.</h2>
-          </div>
-        </div>
-        
+          </p>
+
+      	</div>
         <div class="row">
           <div class="col-md-12">
-            <a class="btn btn-primary btn-lg pull-right" href="dialplan-2.html" role="button">Continuer &raquo;</a>
+            <a class="btn btn-primary btn-lg pull-right" href="dialplan-5.html" role="button">Continuer &raquo;</a>
           </div>
         </div>
       </div>
