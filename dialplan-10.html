@@ -1,0 +1,121 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            p{
+              font-size:1.5em;
+            }
+            code{
+              margin-top:15px;
+              margin-bottom:15px;
+              font-size:1em;
+            }
+            li{
+              font-size:1em;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="col-md-6 col-md-offset-3">
+      		<h2>Interconnection des IPBX</h2>
+          <p>Notre prochaine étape và être de faire communiquer les IPBX configurés entre eux. Par défaut Asterisk n'autorise que les comptes SIP enregistrés à effectuer des communications.</p>
+          <p>Nous allons donc devoir configurer nos comptes SIP (<code>sip.conf</code>) et notre plan d'appel (<code>extensions.conf</code>) pour que les différents téléphones de chaque groupe puissent appeler entre eux</p>
+          <p>Les étapes que nous devront suivre : </p>
+          <ul>
+            <li>Création d'un compte pour chaque serveur avec lequel nous voulons nous connecter</li>
+            <li>Enregistrement de chaque serveur sur les autres serveurs</li>
+            <li>Plan d'appel pour effectuer des appels sortants</li>
+            <li>Plan d'appel pour accepter les appels entrants</li>
+          </ul>
+          <h3>Création de compte</h3>
+          <p>L'objectif de cette partie est de créer un compte avec lequel le serveur distant pourra s'enregistrer.</p>
+          <code>
+            [serveurJeremy]<br>
+            type=friend<br>
+            secret=1234<br>
+            context=externe_entrant<br>
+            host=dynamic<br>
+            disallow=all<br>
+            allow=ulaw
+          </code>
+          <p>Ce compte est donc l'équivalent d'un compte de téléphone.</p>
+          <p>La seule différence actuelle est qu'on le place dans un contexte différent pour des raisons de sécurité.</p>
+          <p>A des fins de sécurité, nous pourrions n'autoriser qu'une adresse IP à s'enregistrer avec ce compte en remplacant <code>dynamic</code> par une adresse.</p>
+          <h3>Enregistrement d'un compte</h3>
+          <p>L'étape suivant và consister à enregistrer votre serveur sur les serveurs distants sur lesquels vous voulez vous connecter.</p>
+          <p>Les lignes d'enregistrement doivent se situer <strong>juste en dessous</strong> de <code>[general]</code>, avant vos comptes.</p>
+          <p>Pour chaque serveur avec lequel vous voulez vous enregistrer : </p>
+          <code>
+            register => LOGIN_DISTANT:MOT_DE_PASSE@IP_SERVEUR_DISTANT/COMPTE_LOCAL
+          </code>
+          <ul>
+            <li><code>LOGIN_DISTANT</code> : le nom du compte qu'on vous a créé sur le serveur distant</li>
+            <li><code>MOT_DE_PASSE</code> : le mot de passe sur le serveur distant</li>
+            <li><code>IP_SERVEUR_DISTANT</code> : l'IP ou le nom de machine (FQN) du serveur sur lequel vous voulez vous connecter</li>
+            <li><code>COMPTE_LOCAL</code> : le nom du compte local correspondant à ce serveur. Ce nom est utilisé pour gérer les appels entrants</li>
+          </ul>
+          <p>Pour qu'un compte fonctionne il faut donc que les configurations soient correctes <strong>des deux côtés</strong>.</p>
+          <p>Pour vérifier que vous êtes correctement enregistré sur des machines distantes, il vous suffit de taper <code>SIP SHOW REGISTRY</code></p>
+          <h3>Plan d'appels pour sortir</h3>
+          <p>Quand votre serveur est bien enregistré sur un serveur distant, il faut ensuite créer dans votre plan d'appel local les <code>exten</code> permettant d'envoyer les appels vers celui ci.</p>
+          <p>Pour celà dans le contexte de vos téléphones vous pouvez ajouter : </p>
+          <code>
+            exten => 400,1,Dial(SIP/serveurJeremy/jeremy)
+          </code>
+          <ul>
+            <li><code>400</code> : le numéro de téléphone a composer pour joindre un téléphone distant</li>
+            <li><code>serveurJeremy</code> : le compte serveur sur lequel se trouve le téléphone que vous désirez joindre</li>
+            <li><code>jeremy</code> : le compte sip du téléphone distant que vous désitez joindre</li>
+          </ul>
+          <h3>Plan d'appels pour entrer</h3>
+          <p class="alert alert-success">Ici, c'est à vous de jouer !<br><br>Essayez de comprendre ce qui se passe quand vous recevez un appel entrant. Créez le plan d'appel permettant aux autres serveurs de faire sonner vos téléphones.</p>
+      	</div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-lg pull-right" href="dialplan-11.html" role="button">Continuer &raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cours Asterisk</title>
+        <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            p{
+              font-size:1.5em;
+            }
+            code{
+              margin-top:15px;
+              margin-bottom:15px;
+              font-size:1em;
+            }
+            li{
+              font-size:1em;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="col-md-6 col-md-offset-3">
+          <h2>Statistiques téléphoniques</h2>
+          <p>Les statistiques téléphoniques sont des éléments importants pour une entreprise. A partir de celles-ci, les entreprises peuvent connaître leurs consommations téléphoniques, savoir si elles ont des appels manqués, et avoir différents indicateurs sur l'activité téléphonique de leurs collaborateurs.</p>
+          <p>Asterisk gère nativement l'écriture de toutes ces informations dans un fichier texte. Vous pouvez trouver ce fichier dans <code>/var/log/asterisk/cdr-csv/Master.csv</code></p>
+          <p>Vous trouverez le détails des différents champs sur la page <a href="http://www.voip-info.org/wiki/view/Asterisk+cdr+csv" target="_blank">la page voip-info.org</a> dédiée</p>
+          <p>Vous pouvez également générer des fichiers personnalisés en éditant le fichier <code>/etc/asterisk/cdr-custom.conf</code>. Vous aurez alors un fichier généré dans <code>/var/log/asterisk/cdr-custom/Mastercsv</code></p>
+          <p>Vous pouvez également généré des champs à partir du dialplan. Consultez <code>core show function CDR</code> dans la console d'Asterisk.</p>
+          <h3>A FAIRE : Générer des champs personnalisé à partir du dialplan.</h3>
+      	</div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-lg pull-right" href="dialplan-13.html" role="button">Continuer &raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>
