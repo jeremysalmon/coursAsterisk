@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Cours Asterisk</title>
+        <title>Cours Asterisk Accueil</title>
         <meta name="description" content="Cours de téléphonie sur IP avec Asterisk">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -16,17 +16,6 @@
             body {
                 padding-top: 50px;
                 padding-bottom: 20px;
-            }
-            p{
-              font-size:1.5em;
-            }
-            code{
-              margin-top:15px;
-              margin-bottom:15px;
-              font-size:1em;
-            }
-            li{
-              font-size:1em;
             }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -52,24 +41,34 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
-        <div class="col-md-6 col-md-offset-3">
-          <h2>Statistiques téléphoniques dans MySQL</h2>
-          <p>Pour faciliter la recherche des statistiques téléphonique, Asterisk vous permet de stocker les statistiques téléphoniques dans différents types de base de données. Le language SQL permettra de facilement retrouver des enregistrements.</p>
-            <p class="alert alert-success">A faire :
-              <ul>
-                <li>Installer MySQL sur votre serveur Debian</li>
-                <li>Créer la base de données pour vos statistiques téléphoniques (vous pouvez avoir de l'aide ici : <a href="https://wiki.asterisk.org/wiki/display/AST/MySQL+CDR+Backend" target="_blank">voip-info.org</a>)</li>
-                <li>Installer le paquet Debian qui permettra à Asterisk de gérer Mysql</li>
-                <li>Configurer le module cdr_mysql a l'aide de <a href="http://www.voip-info.org/wiki/view/Asterisk+config+cdr_mysql.conf" target="_blank">voip-info.org</a></li>
-                <li>Tester des appels et vérifier que vous avez des enregistrements dans MySQL</li>
-              </ul>
-            </p>
-      	</div>
-        <div class="row">
-          <div class="col-md-12">
-            <a class="btn btn-primary btn-lg pull-right" href="dialplan-14.html" role="button">Continuer &raquo;</a>
-          </div>
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1>Sommaire.</h1>
+          <ol>
+            <li><a href="index.html">Bienvenue</a></li>
+            <li><a href="reseau_d_entreprise.html.html">Structure du réseau</a></li>
+            <li><a href="reseau_toip.html">De nouveaux équipements ... sur le réseau informatique existant</a></li>
+            <li><a href="maquette.html">Notre plateforme de test</a></li>
+            <li><a href="install_virtualbox.html">Installation de VirtualBox et préparation pour Debian</a></li>
+            <li><a href="install_debian.html">Installation de Debian et des services Minimum</a></li>
+            <li><a href="outils.html">Outils à utiliser</a></li>
+            <li><a href="asterisk.html">Installation de Asterisk</a></li>
+            <li><a href="sip.html">Configuration d'un compte SIP</a></li>
+            <li><a href="softphone.html">Configuration d'un softphone</a></li>
+            <li><a href="dialplan-2.html">Le plans d'appels</a></li>
+            <li><a href="dialplan-3.html">Faire communiquer 2 téléphones</a></li>
+            <li><a href="dialplan-4.html">Menu vocal interactif</a></li>
+            <li><a href="dialplan-5.html">Gestion des horaires d'ouverture / fermeture</a></li>
+            <li><a href="dialplan-6.html">Gestion des boites vocales</a></li>
+            <li><a href="dialplan-7.html">Sécurisation de l'accès à des fonctions</a></li>
+            <li><a href="dialplan-8.html">Asterisk Database</a></li>
+            <li><a href="dialplan-9.html">Enregistrement des communications</a></li>
+            <li><a href="dialplan-10.html">Interconnection des IPBX</a></li>
+            <li><a href="dialplan-11.html">Système de centre d'appel</a></li>
+            <li><a href="dialplan-12.html">Statistiques téléphoniques</a></li>
+            <li><a href="dialplan-14.html">Manager Asterisk</a></li>
+          </ol>
         </div>
       </div>
 

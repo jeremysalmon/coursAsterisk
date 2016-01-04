@@ -17,9 +17,7 @@
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
-            p{
-              font-size:1.5em;
-            }
+            
             code{
               margin-top:15px;
               margin-bottom:15px;
@@ -47,40 +45,128 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Cours Asterisk</a>
+            <a class="navbar-brand" href="sommaire.html">Cours Asterisk (Sommaire)</a>
           </div>
         </div>
       </nav>
 
       <div class="container-fluid">
         <div class="col-md-6 col-md-offset-3">
-          <h2>Manager Asterisk</h2>
+          <h2>Asterisk Manager Interface</h2>
+          <p>Asterisk AMI (Asterisk Manager Interface) est une interface permettant à un programme client de se connecter au serveur Asterisk afin d’exécuter des commandes.</p>
+          <p>C'est une des briques de Asterisk qui lui vaut sont succès. Asterisk Manager Interface permet de développer des applications tierces interragissant facilement avec Asterisk.</p>
+          <p>Avec Asterisk Manager Interface nous pourrons par exemple faire des applications pour centre d'appel, de gestion du status des téléphones, des interfaces de monitoring ...</p>
+    
+          <hr>
+          <h2>Configuration</h2>
+          <p>Pour pouvoir utiliser Asterisk Manager Interface, il faut se connecter avec un compte valide.</p>
+          <p>Un compte est défini par un login, un mot de passe et des droits associés.</p>
+          <p>Pour créer un nouvel utilisateur de l'Asterisk Manager Interface il faut créer un fichier du nom de l'utilisateur (par exemple <code>jeremy.conf</code>) dans <code>/etc/asterisk/manager.d/</code></p>
           <code>
-          &lt;?php<br>
+          [admin]<br>
+          secret = 1234<br>
+          deny=0.0.0.0/0.0.0.0<br>
+          permit=0.0.0.0/0.0.0.0<br>
+          read = all<br>
+          write = all<br>
+          </code>
+          <p> vous trouverez le détails de ces fichiers de configuration sur la page de <a href="http://www.voip-info.org/wiki/view/Asterisk+config+manager.conf">voip-info.org</a></p>
+
+          <hr>
+          <h2>Tester AMI</h2>
+          <p>Par défaut, AMI fonctionne sur le port <code>5038</code>.</p>
+          <p>Vous pouvez facilement vous connecter à ce port avec Telnet par exemple.</p>
+          <p>Un <code>telnet localhost 5038</code> vous indiquera que vous êtes connecté à AMI</p>
+          <p>Il faudra maintenant vous authentifier : </p>
+          <code>
+            Action: Login
+            Username: admin
+            Secret:1234
+          </code>
+          <p>Quand vous appuierez deux fois sur <code>ENTREE</code> la commande sera envoyée à Asterisk. Vous verrez alors le message de retour.</p>
+          <p>Si vous êtes correctement authentifié vous pourrez envoyer des commandes à Asterisk.</p>
+          <p>AMI dispose de nombreuses commandes. Vous pouvez normalement effectuer tout ce que vous faites à partir de la console d'Asterisk. Une liste complète est disponible sur le site <a href="http://www.voip-info.org/wiki/view/Asterisk+manager+API">voip-info.org</a> dédiée</p>.
+          <p>Si vous voulez par exemple récupérer la liste des téléphones : </p>
+          <code>
+            Action: Command
+            Command: sip show peers
+          </code>
+  
+          <h2>Manager Asterisk avec PHP</h2>
+          <p>AMI devient particulièrement interressant quand il s'agit de se connecter avec un language de développement.</p>
+          <p>Le principe du socket permet de se connecter à partir de n'importe quel language de développement.</p>
+          <p>Nous utiliserons PHP dans notre exemple.</p>
+          <code>
+            &lt;?php<br>
+            $username = 'admin';<br>
+            $password = '1234';<br>
+            $host = 'localhost';<br>
+            <br>
+            $socket = @fsockopen($host,"5038");<br>
+            <br>
+            fputs($socket, "Action: Login\r\n");<br>
+            fputs($socket, "UserName: ".$username."\r\n");<br>
+            fputs($socket, "Secret: ".$password."\r\n\r\n");<br>
+            <br>
+            fputs($socket,"Action: Command\r\n");<br>
+            fputs($socket,"Command: core show channels concise\r\n\r\n");<br>
+            <br>
+            fputs($socket, "Action: Logoff\r\n\r\n");<br>
+            $wrets = 'begin';<br>
+            <br>
+            <br>
+            while(trim($wrets) != '--END COMMAND--'){<br>
+              $wrets=trim(fgets($socket));<br>
+              echo $wrets."<br>";<br>
+            }<br>
+            <br>
+            fclose($socket);<br>
+            ?&gt;
+          </code>
+
+
+
+          <hr>
+          <h2>Dashboard des téléphones enregistrés</h2>
+          <p>Dans l'exemple suivant nous allons faire un page HTML qui se rafraichit toutes les 5 secondes pour afficher l'état des téléphones déclarés dans <code>sip.conf</code></p>
+          <p>Nous utiliserons la commande <code>sip show peers</code> pour récupérer les téléphones, et nous parserons le résultat pour créer un tableau de téléphones vert (si enregistré) ou rouge (si non enregistré).</p>
+          <code>
+          &lt;meta http-equiv="refresh" content="5">
+          &gt;?php<br>
           $username = 'admin';<br>
           $password = '1234';<br>
-          $host = 'localhost';<br>
-<br>
+          $host = '192.168.1.41';<br>
+          <br>
           $socket = @fsockopen($host,"5038");<br>
-<br>
+          <br>
           fputs($socket, "Action: Login\r\n");<br>
           fputs($socket, "UserName: ".$username."\r\n");<br>
           fputs($socket, "Secret: ".$password."\r\n\r\n");<br>
-<br>
+          <br>
           fputs($socket,"Action: Command\r\n");<br>
-          fputs($socket,"Command: core show channels concise\r\n\r\n");<br>
-<br>
+          fputs($socket,"Command: sip show peers\r\n\r\n");<br>
+          <br>
           fputs($socket, "Action: Logoff\r\n\r\n");<br>
+          <br>
           $wrets = 'begin';<br>
-<br>
-<br>
           while(trim($wrets) != '--END COMMAND--'){<br>
-            $wrets=trim(fgets($socket));<br>
-            echo $wrets."<br>";<br>
+                  &nbsp;&nbsp;&nbsp;$wrets=trim(fgets($socket));<br>
+                  <br>
+                  &nbsp;&nbsp;&nbsp;if(strpos($wrets,'Unspecified') !== false){<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$allume = '&lt;p style="background-color:red;color:white">';<br>
+                  &nbsp;&nbsp;&nbsp;}else{<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$allume = '&lt;p style="background-color:green;color:white">';<br>
+                  &nbsp;&nbsp;&nbsp;}<br>
+                  &nbsp;&nbsp;&nbsp;if(strpos($wrets,'(No)')){<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$tmp = explode('/',$wrets);<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$tmp2 = explode(' ',$tmp[1]);<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo($allume."Telephone : ".$tmp2[0]. "&lt;/p>");<br>
+                  &nbsp;&nbsp;&nbsp;}<br>
           }<br>
-<br>
+          <br>
           fclose($socket);<br>
-          ?&gt;
+          ?&lt;
+
           </code>
       	</div>
         <div class="row">
