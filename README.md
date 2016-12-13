@@ -1,5 +1,7 @@
 # Cours de Téléphonie sur IP avec Asterisk
 
+### Ce cours est disponible en ligne [http://jeremysalmon.github.io/coursAsterisk/](http://jeremysalmon.github.io/coursAsterisk/)
+
 ### A qui se destine se cours ?
 
 Ce cours est à destination d'administrateurs débutant n'ayant aucune connaissances dans l'administration Linux, Asterisk et les architectures de téléphonie sur IP.
