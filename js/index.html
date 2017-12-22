@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>   
+   <script>
+      var socket = io();
+
+	socket.on('event', function(data){$('#log').append('<h3>'+data.Username+' '+data.Domain+'</h3>');});
+   </script>
+   <body>Hello world
+
+	<div id="log">
+
+	</div>
+</body>
+
+
+</html>

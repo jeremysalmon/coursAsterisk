@@ -1,0 +1,17 @@
+apt-get update
+apt-get install curl
+curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
+mkdir /root/testNode
+cd /root/testNode
+npm install socket.io
+npm install asterisk.io
+npm install express
+
+Le fichier server.js
+Le fichier index.html
+
+Pour lancer le serveur : 
+node server.js
+
+
